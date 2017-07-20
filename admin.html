@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>adminstor</title>
+	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<style>
+		html,body{
+			height: 100%;
+			margin:0px;
+			padding: 0px;
+		}
+		nav{
+			padding-left:25px;
+			padding-right: 25px
+		}
+		.adminlist{
+			padding-bottom: 40px;
+		}
+		.gap{
+			padding-bottom: 10px;
+		}
+		.corners{
+			-moz-border-radius:40px;
+			-webkit-border-radius:40px;
+			border-radius: 40px;
+		}
+		#gapline{
+			height: 5px;
+		}
+		#leftlist{
+			height: 100%;
+			padding-top:30px; 
+		}
+		#admin{
+			height: 92.8%;
+			padding: 0px;
+			margin-bottom: 0px
+		}
+		#userlist table th{
+			background: #795548;
+		}
+		#userlist1 table th{
+			background: #009688;
+		}
+	</style>
+</head>
+<body>
+<!--导航条-->
+  <nav class="white" role="navigation">
+    <div class="nav-wrapper">
+      <a id="logo-container" href="#" class="brand-logo black-text"><i class="material-icons">assignment_ind</i>BeginnerAdmin</a>
+      <ul class="right hide-on-med-and-down">
+		<li><a href="#" class="black-text">XXX管理</a></li>
+		<li><a href="#" class="black-text">XXX管理</a></li>
+        <li><a href="#" class="black-text">XXX管理</a></li>
+      </ul>
+    </div>
+  </nav>
+<!--管理界面-->
+  <div class="row" id="admin">
+  	<div class="teal col s12" id="gapline"></div>
+
+  	<section id="leftlist" class="col s1 grey darken-3">
+  	  <ul class="container">
+        <li class="adminlist"><a href="#test1" class="white-text" onclick="usergroup()">用户组管理</a></li>
+        <li class="adminlist"><a href="#test2" class="white-text" onclick="userlist()">用户管理</a></li>
+        <li class="adminlist"><a href="#test3" class="white-text">XXX管理</a></li>
+        <li class="adminlist"><a href="#test4" class="white-text">权限管理</a></li>
+      </ul>
+  	</section>
+
+  	<section id="main" class="col s11 white">
+  	  <div id="userlist" class="adminlist">
+  	  	<table class="bordered">
+  	  	  <thead>
+  	  	  	<tr>
+  	  	  	  <th>list</th>
+  	  	  	  <th>list</th>
+  	  	  	  <th>list</th>
+  	  	  	</tr>
+  	  	  </thead>
+  	  	  <tbody>
+  	  	  	<tr>
+  	  	  	  <td>info</td>
+  	  	  	  <td>info</td>
+  	  	  	  <td>info</td>
+  	  	  	</tr>
+  	  	  	<tr>
+  	  	  	  <td>info1</td>
+  	  	  	  <td>info1</td>
+  	  	  	  <td>info1</td>
+  	  	  	</tr>
+  	  	  	<tr>
+  	  	  	 <td>info2</td>
+  	  	  	 <td>info2</td>
+  	  	  	 <td>info2</td>
+  	  	  	</tr>
+  	  	  </tbody>
+  	  	</table>
+  	  </div>
+  	  <div id="userlist1" class="adminlist">
+  	  	<table class="striped">
+  	  	  <thead>
+  	  	  	<tr>
+  	  	  	  <th>用户名</th>
+  	  	  	  <th>用户名称</th>
+  	  	  	  <th>手机</th>
+  	  	  	</tr>
+  	  	  </thead>
+  	  	  <tbody>
+  	  	  	<tr>
+  	  	  	  <td>999999</td>
+  	  	  	  <td>info</td>
+  	  	  	  <td>info</td>
+  	  	  	</tr>
+  	  	  	<tr>
+  	  	  	  <td>info1</td>
+  	  	  	  <td>info1</td>
+  	  	  	  <td>info1</td>
+  	  	  	</tr>
+  	  	  	<tr>
+  	  	  	 <td>info2</td>
+  	  	  	 <td>info2</td>
+  	  	  	 <td>info2</td>
+  	  	  	</tr>
+  	  	  </tbody>
+  	  	</table>
+  	  </div>
+  	 
+  	  <div id="usergroup" class="col s4  brown push-s1 corners">
+  	  	<ul class="col s3">
+  	  	  <li class="gap"><a href="#" class="black-text">用户组名称</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户组描述</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	</ul>
+  	  	<ul class="col s5 right">
+  	  	  <li class="gap"><a class="black-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	</ul>
+  	  </div>
+  	
+  	  <div id="userinfo" class="col s4 teal right pull-s1 corners">
+  	  	<ul class="col s3">
+  	  	  <li class="gap"><a href="" class="white-text">用户ID</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户手机</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	  <li class="gap"><a href="" class="white-text">用户XXX</a></li>
+  	  	</ul>
+  	  	<ul class="col s5 right">
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	  <li class="gap"><a class="white-text">XXXXXX</a></li>
+  	  	</ul>
+  	  </div>
+  	</section>
+
+  </div>
+  <script>
+  	(function(){
+  		$("#userlist1").hide();
+  		$("#userinfo").hide();
+  	})();
+  	function userlist(){
+  		$("#main div").hide();
+  		$("#userlist1").show();
+  		$("#userinfo").show();
+  	}
+  	function usergroup(){
+  		$("#main div").hide();
+  		$("#userlist").show();
+  		$("#usergroup").show();
+  	}
+  </script>
+  <script src='node_modules/materialize-css/dist/js/materialize.js'></script>
+</body>
+</html>

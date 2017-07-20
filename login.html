@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>loginpage</title>
+	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<style>
+		.login{
+			height: 100%;
+		}
+		.login1{
+			margin-top: 15%;
+			-moz-border-radius:20px;
+			-webkit-border-radius:20px;
+			border-radius: 20px;
+		}
+		body{
+			background: url("background3.jpg");
+			-webkit-background-size: cover;
+    		-moz-background-size: cover;
+    		-o-background-size: cover;
+    		background-size: cover;
+		}
+	</style>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div class="row login">
+	<div class="card-panel teal darken-3"><span class="blue-grey-text text-lighten-5">欢迎登录信息数据可视化平台</span></div>
+	<div class="col s2 push-s5 login1 grey lighten-2 z-depth-5">
+	<form action="index.html" name="iform">
+		<ul>
+			<li>
+				<label class="teal-text text-darken-4">用户名:</label>
+				<input type="text" name="username" required="required" id="nameuser">
+			</li>
+			<li>
+				<label class="teal-text text-darken-4">密码:</label>
+				<input type="password" name="userpassword" required="required" id="passworduser">
+			</li>
+		</ul>
+	</form>
+	<button  class="btn" onclick="checklogin()">登录</button>
+	</div>
+	</div>
+	<script>
+		var username = $("#nameuser");
+		var userpassword = $("#passworduser");
+		function checklogin(){
+			if (username=="") {
+				alert("不能为空！")
+				return false;
+			}
+			$.ajax({
+				type:"GET",
+				url:"http://localhost:8080/BIMPlus/capacity.json",
+				data:$("form").serialize(),
+				dataType:"jsonp",
+				jsonp:"callback",
+				jsonpCallback:"callbackFun",
+				success:function(json){
+					if (json=="") {
+						return false;
+					}else{
+						document.iform.submit();
+					}
+					
+				}
+			});
+		}
+	</script>
+	<script src='node_modules/materialize-css/dist/js/materialize.js'></script>
+</body>
+</html>

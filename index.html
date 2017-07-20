@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<title>test</title>
+	<style type="text/css">
+		#left-bar{
+			height: 850px;
+			border: solid gray;
+		}
+		#index-banner{
+			height: 100px;
+		}
+		#mainarea{
+			height: 850px;
+			border: solid gray;
+		}
+		.no1{
+			background: gray;
+			height: 50px;
+			margin-bottom: 30px;
+		}
+		#section1{
+			list-style: none;
+		}
+		.panelll{
+			display: none;
+			position: absolute;
+			z-index: 999;
+			height: 100px;
+		}
+	</style>
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<script src="node_modules/echarts/dist/echarts.js"></script>
+	<script src="js/china.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="js/geocoord.js"></script>
+	<script src="js/mapinfo.js"></script>
+	<script src="js/ajax.js"></script>	
+</head>
+
+<body>
+<!--主题栏-->
+ <nav class="nav-extended">
+    <div class="nav-wrapper row">
+			<div class="col s1"><a href="#" class="brand-logo">Logo</a></div>
+    	<h5 class="valign center col s9">信息数据可视化平台</h5>
+      <div class="col s2"><ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="collapsible.html">用户登录信息</a></li>
+			</ul>
+			</div>
+    </div>
+    <div class="nav-content teal">
+      <ul class="tabs tabs-transparent">
+        <li class="tab valign-wrapper"><a href="#test1" onclick="filter()" data-activates="slide-out" class="collapse">选项 1</a></li>
+        <li class="tab"><a class="active" onclick="filter1()" href="#test2">选项 2</a></li>
+				<li class="tab"><a id="section3">选项 3</a>
+				<div class="panelll">ahhahahahahahahahah</div>
+				</li>
+        <li class="tab right"><a onclick="propoty()" id="shuxin">属 性</a></li>
+      </ul>
+    </div>
+	</nav>
+	
+ <div id="qqq" class="row">
+	  <!--功能列表-->
+      <div class="col s1 brown lighten-1" id="left-bar">
+
+			<ul id="slide-out" class="side-nav">
+    	<li><div class="userView">
+      <div class="background">
+        <img src="background1.jpg">
+      </div>
+      <a href="#!user"><img class="circle" src="background2.jpg"></a>
+      <a href="#!name"><span class="white-text name">张轩</span></a>
+      <a href="#!email"><span class="white-text email">zhangxuan@cqupt.com</span></a>
+			</div></li>
+			<li><a href="#!"><i class="material-icons">cloud</i>宏观经济</a></li>
+			<li><a href="#!">第二链接</a></li>
+			<div id="xuanxiang"></div>
+  		</ul>
+  		
+			<div id="www"> 
+      <form id="inputQuery">
+      	<div class="input-field col s12">
+        	<input id="inputFrom" placeholder="输入筛选信息" type="text" class="validate" name="comId">
+        	<input type="text" name="yearFrom" placeholder="输入筛选信息" class="validate" id="yearFrom">
+        	<input id="inputFrom" placeholder="输入筛选信息" type="text" class="validate" name="monthFrom">
+        </div>
+        </form>
+        <button class="waves-effect brown darken-4 btn no1" onclick="yearQuery()">提交</button>
+        <a class="waves-effect brown darken-4 btn no1" onclick="heatmap()">热力视图</a>
+        <a class="waves-effect brown darken-4 btn no1" onclick="conversion()" id="btn3">三维视图</a>
+				<a class="waves-effect brown darken-4 btn no1" onclick="converback()" id="btn2">二维视图</a>
+				</div>
+
+				<div id="littlebar">
+				
+				</div>
+      </div>
+       
+      <!--可视化区域-->
+      	<!-- 二维展示 -->
+		<div class="col s11" id="mainarea"></div>
+
+	  	<!-- 三维视图 -->
+		<div class="col s11" id="cesiumContainer"></div>
+		
+		
+    
+ </div>
+
+<script src="js/echart.js"></script>
+<script src='node_modules/materialize-css/dist/js/materialize.js'></script>
+<script src="js/control.js"></script>
+</body>
+</html>
