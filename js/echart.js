@@ -311,9 +311,9 @@ myChart.on("click",function(params){//点击事件，点击显示图表
 // 		}
 // 	}
 // });
-var caonima=0;
+var hope=0;
 myChart.on("timelinechanged",function(params){
-	 caonima=params.currentIndex;
+	 hope=params.currentIndex;
 });
 
 myChart.on('brushselected', renderBrushed);
@@ -343,7 +343,7 @@ function renderBrushed(params){
 
 		for(var i=0;i<mainSeries.dataIndex.length;i++){
 		var rawIndex=mainSeries.dataIndex[i];
-		var dataItem=converdata(geocoord,mapinfo[caonima])[rawIndex];
+		var dataItem=converdata(geocoord,mapinfo[hope])[rawIndex];
 		var pdValue=dataItem.value[2];
 
 		sum += pdValue;

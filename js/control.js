@@ -46,18 +46,31 @@ function propoty(){
 function gdp(){
 	alert(event.srcElement.innerHTML);
 }
-var qwer=["GDP","人均GDP","CPI"];
+
+var qwer=[];
+var a=[1,1,2];
+var b=["GDP","人均GDP","CPI"]
+for(let i=0;i<3;i++){
+	qwer.push({
+	name:a[i],
+	value:b[i]
+});
+}
+
 //动态生成选项列表
 function filter(){
 	$("#www").hide();
-	$("#xuanxiang li").remove();
-	for(let x of qwer){
-		$("#xuanxiang").append(
-		'<li><a href="#" class="white-text" onclick="propoty()">'+x+'</a></li>'
-	);}
+	//$("#xuanxiang li").remove();
+	for(let i=0;i<3;i++){
+		if(qwer[i].name==2){
+			$("#xuanxiang").append(
+			'<input placeholder="输入筛选信息" type="text"/>'
+			);
+		}else{
+			$("#xuanxiang").append(
+			'<li><a href="#" class="white-text" onclick="propoty()">'+qwer[i].value+'</a></li>'
+			)
+		}
+	}		
 	$('.button-collapse').sideNav('hide');
 }
-
-$("#section3").click(function(){
-	$(".panelll").slideToggle();
-});
