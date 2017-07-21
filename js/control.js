@@ -53,8 +53,9 @@ function filter(){
 	$("#xuanxiang li").remove();
 	for(let x of qwer){
 		$("#xuanxiang").append(
-		'<li><a href="#" class="black-text" onclick="propoty()">'+x+'</a></li>'
+		'<li><a href="#" class="white-text" onclick="propoty()">'+x+'</a></li>'
 	);}
+	$('.button-collapse').sideNav('hide');
 }
 
 $("#section3").click(function(){
