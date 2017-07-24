@@ -19,11 +19,11 @@ function propoty(){
 				series:[{
 				name:'piepie',
 				center:['88%','25%'],
-				data:converdata1(plist,mapinfo[caonima])
+				data:converdata1(plist,mapinfo[hope])
 			},{
 				name:'barbar',
 				type:'bar',
-				data:converdata1(plist,mapinfo[caonima])
+				data:converdata1(plist,mapinfo[hope])
 			}]
 			}
 		})
