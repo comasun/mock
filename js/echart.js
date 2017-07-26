@@ -1,6 +1,6 @@
 var myChart = echarts.init(document.getElementById('mainarea'));
-var plist=["北京市","天津市","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省","上海市","江苏省","浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西壮族自治区","海南省","重庆市","四川省","贵州省","云南省","西藏自治区","陕西省","甘肃省","青海省","宁夏回族自治区","新疆维吾尔自治区"];
 var year=['2015','2014','2013','2012','2011','2010','2009','2008','2007','2006'];
+var pilst=["北京","天津","河北","山西","内蒙古","辽宁","吉林","黑龙江","上海","江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","广西","海南","重庆","四川","贵州","云南","西藏","陕西","甘肃","青海","宁夏","新疆"];
 
 
 var option = {
@@ -32,13 +32,17 @@ var option = {
 	},//提示框
 	geo:{
 		map:'china',//地图
+		selectedMode:'single',
 		left:300,
 		label:{
 			emphasis:{
-				show:false
-			}//高亮
-		},//图形上的文本标签
-		roam:true,//开启鼠标缩放
+				show:true
+			},
+			normal:{
+				show:true
+			}
+		},
+		roam:false,//开启鼠标缩放
 		itemStyle:{
 			normal:{
 				areaColor:'#323c48',
@@ -99,50 +103,70 @@ var option = {
 	},
 //X轴参数设置
 	xAxis:{
+		id:'top10',
 		position:'top',
-		//type:'value',
+		type:'category',
 		scale:true,//比例尺
 		boundaryGap:false,//坐标轴两边留白
 		splitLine:{show:false},//刻度分隔线
 		axisTick:{show:false},//坐标轴刻度，true为全显示	
 		axisLine:{show:false},//坐标轴轴线
-		axisLabel:{margin:2,textStyle:{color:'#aaa'}}
+		axisLabel:{margin:2,textStyle:{color:'#aaa'}},
+		data:[]
 	},
 //Y轴参数设置
 	yAxis:{
-		id:'top10',
-		type:'category',
+		type:'value',
 		nameGap:5,//坐标名与轴线之间的距离
 		axisLine:{show:false,lineStyle:{color:'#ddd'}},
 		axisTick:{show:false,lineStyle:{color:'#ddd'}},
 		axisLabel:{interval:0,textStyle:{color:'#fff'}},//坐标轴标签设置项
-		data:[]
+
 	},
 	
-	series:[{
-		name:'产值',
-		type:'scatter',
-		coordinateSystem:'geo',
-		data:[],
-		symboleSize:12,
+	series:[
+	// 	{
+	// 	name:'产值',
+	// 	type:'scatter',
+	// 	coordinateSystem:'geo',
+	// 	data:[],
+	// 	symboleSize:12,
+	// 	label:{
+	// 		emphasis:{
+	// 			show:false
+	// 		},
+	// 		normal:{
+	// 			show:false,
+	// 			//textStyle:{color:'#9e9d24'}
+	// 		}
+	// 	},
+	// 	itemStyle:{
+	// 		emphasis:{
+	// 			borderColor:'#9e9d24',
+	// 			borderWidth:1
+	// 		},
+	// 		normal:{
+	// 			color:'#00c853'
+	// 		}
+	// 	}
+	// },
+	{
+		name:'mapmap',
+		left:300,
 		label:{
 			emphasis:{
-				show:false
+				show:true
 			},
 			normal:{
-				show:false,
-				//textStyle:{color:'#9e9d24'}
+				show:true
 			}
 		},
-		itemStyle:{
-			emphasis:{
-				borderColor:'#9e9d24',
-				borderWidth:1
-			},
-			normal:{
-				color:'#00c853'
-			}
-		}
+		type:'map',
+		map:'china',
+		tooltip:{
+			show:false
+		},
+		data:[]
 	},
 //柱状图模块
 	{
@@ -229,7 +253,7 @@ var option = {
 	},
 	{
 		name:'piepie',
-		center:['88%','30%'],
+		center:['86%','28%'],
 		zlevel:2,
 		type:'pie',
 		radius: '50%',
@@ -262,15 +286,16 @@ var option = {
 	options:[]	
 };
 
-for(let i=0;i<year.length;i++){
-  option.options.push({
-    series:[{
-      name:'产值',
-      type:'scatter',
-      data:converdata(geocoord,mapinfo[i])
-    }]
-  });
-}
+ for(let i=0;i<year.length;i++){
+   option.options.push({
+     series:[{
+       name:'mapmap',
+			 type:'map',
+			 map:'china',
+       data:converdata1(pilst,mapinfo[i])
+     }]
+   });
+ }
 
 function converdata(arr,arr1){
   var temp=[];
@@ -298,10 +323,9 @@ function converdata1(arr,arr1){
 myChart.setOption(option);
 //myChart.on('brushselected',renderBrushed);//刷选事件
 myChart.on("click",function(params){//点击事件，点击显示图表
-	if (params.componentType=="series") {
-		if (params.seriesType=="scatter") {
-			query(params.dataIndex);
-		}
+	if(params.componentType=='geo'){
+		//alert(params.name);
+		query(params.name);
 	}
 });
 // myChart.on("click",function(params){
@@ -314,21 +338,23 @@ myChart.on("click",function(params){//点击事件，点击显示图表
 var hope=0;
 myChart.on("timelinechanged",function(params){
 	 hope=params.currentIndex;
+		query(year[hope],type);
+		
 });
 
-myChart.on('brushselected', renderBrushed);
-setTimeout(function(){
-	myChart.dispatchAction({//区域刷子设置
-		type:'brush',
-		areas:[
-			{
-				geoIndex:0,
-				brushType:'polygon',
-				coordRange:[[119.72,34.85],[119.5,34.84],[119.5,34.84],[119.19,34.77]]
-			}
-		]
-	});
-},0);
+// myChart.on('brushselected', renderBrushed);
+// setTimeout(function(){
+// 	myChart.dispatchAction({//区域刷子设置
+// 		type:'brush',
+// 		areas:[
+// 			{
+// 				geoIndex:0,
+// 				brushType:'polygon',
+// 				coordRange:[[119.72,34.85],[119.5,34.84],[119.5,34.84],[119.19,34.77]]
+// 			}
+// 		]
+// 	});
+// },0);
 
 function renderBrushed(params){
 

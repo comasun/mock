@@ -1,9 +1,10 @@
+var type="1";
 var geoCoordMap=[];
 var map=[];
 //全国钢铁公司地理位置分布
 		$.ajax({
 		type:"GET",
-		url:"http://localhost:8080/BIMPlus/companyList",
+		url:"http://localhost:8080/BIMPlus/macdata.json",
 		dataType:'jsonp',
 		jsonp:"callback",
 		jsonpCallback:"callbackFun",
@@ -11,13 +12,8 @@ var map=[];
 			var data=json;
 			if (json) {
 				for(var i=0;i<data.length;i++){
-					geoCoordMap.push({
-						Id:data[i].comId,
-						name:data[i].comName,
-						value:[data[i].longitude,data[i].latitude,data[i].comId]
-					});
 					map.push({
-						comId:data[i].comId
+						divCode:data[i].divCode
 					});
 				}
 			}
@@ -31,33 +27,40 @@ var map=[];
 	});
 	
 //点击地图上的点显示饼图
-	function query(x){
-		var capacity=[];
+	
+function query(x,y){	
+	var capacity=[];
 		$.ajax({
 			type:"GET",
-			url:"http://localhost:8080/BIMPlus/capacity.json",
-			data:map[x],
+			url:"http://localhost:8080/BIMPlus/macdata.json",
+			data:{macDataType:y,macDataYear:x},
 			dataType:"jsonp",
 			jsonp:"callback",
-			jsonpCallback:"callbackFun",
+			//jsonpCallback:"callbackFun",
 			success:function(json){
 				for(var i=0;i<json.length;i++){
+					plist[i]=json[i].divName;
 					capacity.push({
-						value:parseInt(json[i].capacity),
-						name:json[i].productId
-					});
+					name:json[i].divName,
+					value:json[i].dataValue
+				
+					});	
 				}
 				myChart.setOption({
 					baseOption:{
 						series:[{
 						name:'piepie',
 						data:capacity
+						},{
+							name:'barbar',
+							data:capacity
 						}]
 					}
 				});
 			}
 
 		});
+		return capacity;
 	}
 
 //点击产品显示详细月份产能

@@ -31,6 +31,7 @@
 			z-index: 999;
 			height: 100px;
 		}
+		#xuanxiang li:hover {color: teal}
 	</style>
 	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
@@ -38,8 +39,9 @@
 	<script src="js/china.js"></script>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/geocoord.js"></script>
+	<script src="js/ajax.js"></script>
 	<script src="js/mapinfo.js"></script>
-	<script src="js/ajax.js"></script>	
+
 </head>
 
 <body>
@@ -56,7 +58,7 @@
     <div class="nav-content teal">
       <ul class="tabs tabs-transparent">
         <li class="tab valign-wrapper"><a href="#test1" data-activates="slide-out" class="collapse">选项 1</a></li>
-        <li class="tab"><a class="active" onclick="filter1()" href="#test2">选项 2</a></li>
+        <li class="tab"><a class="active"  href="#test2">选项 2</a></li>
 				<li class="tab"><a id="section3">选项 3</a>
 				<div class="panelll">ahhahahahahahahahah</div>
 				</li>
@@ -78,8 +80,10 @@
       <a href="#!name"><span class="white-text name">张轩</span></a>
       <a href="#!email"><span class="white-text email">zhangxuan@cqupt.com</span></a>
 			</div></li>
-			<li><a href="#!" onclick="filter()"><i class="material-icons">cloud</i>宏观经济</a></li>
-			
+			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>宏观经济</a></li>
+			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
+			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
+			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
 			</ul>
 			<div id="xuanxiang"></div>
   		
