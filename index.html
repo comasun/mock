@@ -6,9 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<title>test</title>
 	<style type="text/css">
+		#main{
+			padding: 0
+		}
 		#left-bar{
-			height: 850px;
+			height: 1100px;
 			border: solid gray;
+		
 		}
 		#index-banner{
 			height: 100px;
@@ -16,6 +20,14 @@
 		#mainarea{
 			height: 850px;
 			border: solid gray;
+		}
+		#mainarea1{
+			height: 1100px;
+			border: solid gray;
+			
+		}
+		#mainarea2{
+			height: 250px;
 		}
 		.no1{
 			background: gray;
@@ -37,7 +49,10 @@
 	<link rel="stylesheet" type="text/css" href="node_modules/materialize-css/dist/css/materialize.min.css">
 	<script src="node_modules/echarts/dist/echarts.js"></script>
 	<script src="js/china.js"></script>
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/jquery/dist/jquery-ui.custom.js"></script>
+	<script src="node_modules/jquery/dist/jquery.cookie.js"></script>
+	<script src="node_modules/jquery/dist/jquery.dynatree.js"></script>
 	<script src="js/geocoord.js"></script>
 	<script src="js/ajax.js"></script>
 	<script src="js/mapinfo.js"></script>
@@ -57,7 +72,7 @@
     </div>
     <div class="nav-content teal">
       <ul class="tabs tabs-transparent">
-        <li class="tab valign-wrapper"><a href="#test1" data-activates="slide-out" class="collapse">选项 1</a></li>
+        <li class="tab valign-wrapper"><a href="#test1" onclick="menulv1()" data-activates="slide-out" class="collapse">选项 1</a></li>
         <li class="tab"><a class="active"  href="#test2">选项 2</a></li>
 				<li class="tab"><a id="section3">选项 3</a>
 				<div class="panelll">ahhahahahahahahahah</div>
@@ -72,18 +87,17 @@
       <div class="col s1 brown lighten-1" id="left-bar">
 
 			<ul id="slide-out" class="side-nav">
-    	<li><div class="userView">
+    	<div class="userView">
       <div class="background">
         <img src="background1.jpg">
       </div>
       <a href="#!user"><img class="circle" src="background2.jpg"></a>
       <a href="#!name"><span class="white-text name">张轩</span></a>
       <a href="#!email"><span class="white-text email">zhangxuan@cqupt.com</span></a>
-			</div></li>
-			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>宏观经济</a></li>
-			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
-			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
-			<li><a href="#!" onclick="menulv2()"><i class="material-icons">cloud</i>XXXXXX</a></li>
+			</div>
+			<div id="tree">
+				<ul></ul>
+			</div>
 			</ul>
 			<div id="xuanxiang"></div>
   		
@@ -107,11 +121,13 @@
       </div>
        
       <!--可视化区域-->
-      	<!-- 二维展示 -->
-		<div class="col s11" id="mainarea"></div>
-
-	  	<!-- 三维视图 -->
-		<div class="col s11" id="cesiumContainer"></div>
+				<!-- 地图区域 -->
+		<div class="col s8" id="main">
+		<div id="mainarea"></div>
+		<div id="mainarea2"></div>
+		</div>
+	  	<!-- 列表区域 -->
+		<div class="col s3" id="mainarea1"></div>
 		
 		
     

@@ -2,7 +2,7 @@ $(document).ready(function(){
 			$('.parallax').parallax();
 			$(".dropdown-button").dropdown();
 			$(".collapse").sideNav();
-				$("#www").hide();
+			$("#www").hide();
     });
 //点击属性显示详细信息
 function propoty(){
@@ -17,47 +17,10 @@ function propoty(){
 	if(event.srcElement.innerHTML=="GDP"){
 		type="1";
 		query(year[hope],type);
-		// myChart.setOption({
-		// 	baseOption:{
-		// 		series:[{
-		// 		name:'piepie',
-		// 		center:['88%','25%'],
-		// 		data:query(year[hope],"1")
-		// 	},{
-		// 		name:'barbar',
-		// 		type:'bar',
-		// 		data:query(year[hope],"1")
-		// 	}]
-		// 	}
-		// })
 	}else if(event.srcElement.innerHTML=="CPI"){
-		// myChart.setOption({
-		// 	baseOption:{
-		// 		series:[{
-		// 		name:'piepie',
-		// 		center:['88%','25%'],
-		// 		data:query(year[hope],"3")
-		// 	},{
-		// 		name:'barbar',
-		// 		data:query(year[hope],"3")
-		// 	}]
-		// 	}
-		// })
 		type="3";
 		query(year[hope],type);
 	}else{
-		// myChart.setOption({
-		// 	baseOption:{
-		// 		series:[{
-		// 		name:'piepie',
-		// 		center:['88%','25%'],
-		// 		data:query(year[hope],"5")
-		// 	},{
-		// 		name:'barbar',
-		// 		data:query(year[hope],"5")
-		// 	}]
-		// 	}
-		// })
 		type="5";
 		query(year[hope],type);
 	}
@@ -72,26 +35,44 @@ for(let i=0;i<3;i++){
 	value:b[i]
 });
 }
-
+var menu=[];
 //动态生成一级列表
 function menulv1(){
-var menu=[];
+
 	$.ajax({
 		type:'GET',
-		//url:"http://localhost:8080/BIMPlus/macdata.json",
+		url:"http://localhost:8080/BIMPlus/menuList.json",
 		//data:{macDataType:1},
 		dataType:"jsonp",
 		jsonp:"callback",
 		jsonpCallback:"callbackFun",
 		success:function(json){
-			for(let i=0;i<3;i++){
+			$(".dynatree-container span").remove();
+			$("#tree").dynatree({
+			title: "Programming Sample",
+			onActivate: function(node) {
+				$("#echoActive").text(node.data.title);
+				//menulv2();
+				if( node.data.url )
+					window.open(node.data.url, node.data.target);
+			}
+		});
+			for(let i=0;i<json.length;i++){
 				menu.push({
-					dataType:json[i].dataType,
-					value:json[i].dataValue
-		})
-			$("#slide-out").append(
-			'<li><a href="#!" onclick="filter()"><i class="material-icons">cloud</i>'+menu[i].dataValue+'</a></li>'
-			)
+					ID:json[i].menuId,
+					value:json[i].menuName
+				});
+				var obj = [
+				{ title: menu[i].value, isFolder: true,
+					children: [
+						{ title: 'GDP' },
+						{ title: 'CPI' }
+					]
+				}
+			];
+				$("#tree").dynatree("getRoot").addChild(obj);
+				$(".dynatree-title").attr('class','black-text');
+				$(".black-text").prepend('<i class="material-icons">cloud</i>');
 			}
 		}
 	});
@@ -99,28 +80,35 @@ var menu=[];
 
 //动态生成二级列表
 function menulv2(){
-var menu=[];
+
+	// for(let i=0;i<menu.length;i++){
+	// 	if(event.srcElement.innerHTML==menu[i].menuName){
+	// 		var x=menu[i].ID;
+	// 	}
+	// }
+
+var menulv=[];
 	$.ajax({
 		type:'GET',
-		//url:"http://localhost:8080/BIMPlus/macdata.json",
-		//data:{macDataType:1},
+		url:"http://localhost:8080/BIMPlus/selectItemList.json",
+		data:{menuId:"110000"},
 		dataType:"jsonp",
 		jsonp:"callback",
 		jsonpCallback:"callbackFun",
-		success:function(){
-			menu.push({
-				dataType:json[i].dataType,
-				value:json[i].dataValue
-			})
+		success:function(json){
 			$("#xuanxiang li").remove();
-			for(let i=0;i<3;i++){
-				if(menu[i].dataType==2){
+			for(let i=0;i<json.length;i++){
+				menulv.push({
+				//dataType:json[i].siId,
+				value:json[i].siName
+			})
+				if(menulv[i].dataType==2){
 					$("#xuanxiang").append(
 					'<input placeholder="输入筛选信息" type="text"/>'
 					);
 				}else{
 					$("#xuanxiang").append(
-					'<li><a href="#!" class="white-text" onclick="propoty()">'+menu[i].value+'</a></li>'
+					'<li><a href="#!" class="white-text" onclick="propoty()">'+menulv[i].value+'</a></li>'
 					)
 				}
 			}		
