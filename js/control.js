@@ -52,7 +52,7 @@ function menulv1(){
 			title: "Programming Sample",
 			onActivate: function(node) {
 				$("#echoActive").text(node.data.title);
-				//menulv2();
+				menulv2();
 				if( node.data.url )
 					window.open(node.data.url, node.data.target);
 			}

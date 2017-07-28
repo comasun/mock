@@ -46,6 +46,12 @@ function query(x,y){
 				
 					});	
 				}
+				myChart.setOption({
+					series:[{
+						name:'mapmap',
+						data:capacity
+					}]
+				});
 				myChart1.setOption({
 						series:[{
 						name:'piepie',
@@ -71,7 +77,7 @@ var arrPMI=[];
 	$.ajax({
 		type:"GET",
 			url:"http://localhost:8080/BIMPlus/macdata.json",
-			data:{macDataId:x},
+			data:{macDivName:x},
 			dataType:"jsonp",
 			jsonp:"callback",
 			success:function(json){
@@ -79,17 +85,17 @@ var arrPMI=[];
 					if(json[i].dataType=="1"){
 						arrGDP.push({
 						dataYear:json[i].dataYear,
-						value:json[i].value
+						value:json[i].dataValue
 						});
 					}else if(json[i].dataType=="3"){
 						arrCPI.push({
 							dataYear:json[i].dataYear,
-							value:json[i].value
+							value:json[i].dataValue
 						});
 					}else{
 						arrPMI.push({
 							dataYear:json[i].dataYear,
-							value:json[i].value
+							value:json[i].dataValue
 						});
 					}
 				}

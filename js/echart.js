@@ -295,6 +295,50 @@ var option1={
 			}
 		},
 		data:[]
+	},{
+		name:'piepie1',
+		center:['50%','75%'],
+		zlevel:2,
+		type:'pie',
+		radius: '85%',
+		roseType:'radius',
+		tooltip:{
+			trigger:'item',
+			triggerOn:'mousemove',
+			hideDelay:100,
+			formatter: function(params) {
+				return params.name + ' : ' + params.value;
+			}
+		},
+		label:{
+			normal:{
+				show:false,
+				position:'inside'
+			}
+		},
+		data:[]
+	},{
+		name:'piepie2',
+		center:['50%','25%'],
+		zlevel:2,
+		type:'pie',
+		radius: '85%',
+		roseType:'radius',
+		tooltip:{
+			trigger:'item',
+			triggerOn:'mousemove',
+			hideDelay:100,
+			formatter: function(params) {
+				return params.name + ' : ' + params.value;
+			}
+		},
+		label:{
+			normal:{
+				show:false,
+				position:'inside'
+			}
+		},
+		data:[]
 	}]
 }
 
@@ -357,16 +401,16 @@ var option2={
 	}]
 }
 
- for(let i=0;i<year.length;i++){
-   option.options.push({
-     series:[{
-       name:'mapmap',
-			 type:'map',
-			 map:'china',
-       data:converdata1(pilst,mapinfo[i])
-     }]
-   });
- }
+//  for(let i=0;i<year.length;i++){
+//    option.options.push({
+//      series:[{
+//        name:'mapmap',
+// 			 type:'map',
+// 			 map:'china',
+//        data:converdata1(pilst,mapinfo[i])
+//      }]
+//    });
+//  }
 
 function converdata(arr,arr1){
   var temp=[];
@@ -396,9 +440,10 @@ myChart1.setOption(option1);
 myChart2.setOption(option2);
 //myChart.on('brushselected',renderBrushed);//刷选事件
 myChart.on("click",function(params){//点击事件，点击显示图表
-	if(params.componentType=='geo'){
-		//alert(params.name);
-		province(params.dataIndex);
+	if(params.componentType=='series'){
+		if(params.seriesName=="mapmap"){
+			alert(params.name);
+		}
 	}
 });
 // myChart.on("click",function(params){
